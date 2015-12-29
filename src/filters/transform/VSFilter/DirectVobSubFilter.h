@@ -86,6 +86,7 @@ public:
     // IDirectVobSub
     STDMETHODIMP put_FileName(WCHAR* fn);
     STDMETHODIMP get_LanguageCount(int* nLangs);
+	HRESULT GetIsEmbeddedSubStream(int iSelected, bool * fIsEmbedded);
     STDMETHODIMP get_LanguageName(int iLanguage, WCHAR** ppName);
     STDMETHODIMP put_SelectedLanguage(int iSelected);
     STDMETHODIMP put_HideSubtitles(bool fHideSubtitles);
@@ -151,6 +152,7 @@ protected:
 
     CCritSec m_csSubLock;
     CInterfaceList<ISubStream> m_pSubStreams;
+	CAtlList<bool> m_fIsSubStreamEmbeded;
     CComQIPtr<ISubStream> m_pCurrentSubStream;
     void UpdateSubtitle();
     void SetSubtitle(ISubStream* pSubStream);
